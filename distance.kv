@@ -1,0 +1,101 @@
+<MenuScreen>:
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'blue_background.jpg'
+        Image:
+            source: 'logo_img.png'
+            size_hint: 0.6, 0.4
+            pos_hint: {'x':0.2, 'y':0.5}
+        Label:
+            pos_hint: {'x':0.4, 'y':0.45}
+            text: 'Distance Calculator'
+            color: [ 0, 0, 0, 1]
+            font_size: 50
+            size_hint : (0.2, 0.2)
+        Button:
+            text: 'Calculate'
+            size_hint: 0.5, 0.075
+            pos_hint: {'x':0, 'y':0}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'selection'
+        Button:
+            text: 'Quit'
+            size_hint: 0.5, 0.075
+            pos_hint: {'x':0.5, 'y':0}
+            on_press:
+                app.stop()
+
+
+<SelectionScreen>:
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'blue_background.jpg'
+        TextInput:
+            size_hint: (1,0.05)
+            pos_hint: {'x':0, 'y':0.7}
+            multiline: False
+            text: 'Origin'
+            id: origin
+        TextInput:
+            size_hint: (1,0.05)
+            pos_hint: {'x':0, 'y':0.6}
+            multiline: False
+            text: 'Destination'
+            id: destination
+        Button:
+            size_hint: (0.4,0.05)
+            pos_hint: {'x':0.3, 'y':0.4}
+            text: 'Calculate Distance'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'distance'
+                root.get_locations(origin.text, destination.text)
+        Button:
+            size_hint: (1, 0.075)
+            pos_hint: {'x':0, 'y':0}
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+
+
+<DistanceScreen>:
+    on_enter:
+        root.update()
+        root.center_screen()
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Map:
+            id: mapview
+            zoom: 12
+            lat: 50
+            lon: 1
+
+            MapLayer:
+                id: line
+        Label:
+            pos_hint: {'x':0.3, 'y':0.5}
+            id: Label1
+            text: 'Empty'
+            color: [ 66/255, 103/255, 178/255, 1]
+            font_size: 80
+            size_hint : (0.4, 0.2)
+        Button:
+            text: 'Back to location entry'
+            size_hint: (1, 0.1)
+            pos_hint: {'x':0, 'y':0}
+            on_press:
+                root.clear()
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'selection'
