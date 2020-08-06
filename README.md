@@ -18,3 +18,7 @@ Selection screen to select two locations by name:
 Display screen where an actual map is displayed with a straight line between the two locations. Also the distance is shown in kilometers:
 
 <img src="/images/img_3.png" width="300" >
+
+## References
+
+Background image: https://onlyvectorbackgrounds.com/lines-abstract-gradient-background-blue/
