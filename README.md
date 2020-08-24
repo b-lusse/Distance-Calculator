@@ -2,7 +2,7 @@
 
 ## Info
 
-Small app with functionality to calculate distances between two locations pretty accurately. Uses Kivy for GUI creation using Python. 
+Small app with functionality to calculate distances between two locations pretty accurately. Uses Kivy for GUI creation. 
 
 
 ## Screenshots
